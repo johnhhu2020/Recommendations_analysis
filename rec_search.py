@@ -18,9 +18,11 @@ class EventParser:
     def parser(self, line:str) -> Event:
         parts = line.split()
         # prinnt(parts)
+        iso_str = f"{parts[0]}T{parts[1]}"
+
         return Event(
-            ts = datetime.strptime(
-                f"{parts[0]} {parts[1]}", "%Y-%m-%d %H:%M:%S"),
+            ts = datetime.fromisoformat(iso_str),
+            # dump ts = datetime.strptime(f"{parts[0]} {parts[1]}", "%Y-%m-%d %H:%M:%S"),
             role_id = int(parts[2]),
             action = parts[3],
             item_id = int(parts[4])
